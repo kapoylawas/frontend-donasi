@@ -23,26 +23,25 @@
                 <router-link :to="{name: 'donation.index'}">
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                         <div class="col-span-5">
-                            <i class="fa fa-heart" aria-hidden="true"></i> Donasi Saya
+                        <i class="fa fa-heart" aria-hidden="true"></i> Donasi Saya
                         </div>
                     </div>
                 </router-link>
 
-                <a href="#">
+                <router-link :to="{name: 'profile'}">
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
-                        <div class="col-span-5">
-                            <i class="fa fa-user-circle" aria-hidden="true"></i> Profile Saya
+                        <div class="col-span-5"> <i class="fa fa-user-circle" aria-hidden="true"></i> Profile Saya
                         </div>
                     </div>
-                </a>
+                </router-link>
 
-                <a href="#">
+                <router-link :to="{name: 'profile.password'}">
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
                         <div class="col-span-5">
                             <i class="fa fa-key" aria-hidden="true"></i> Ubah Password
                         </div>
                     </div>
-                </a>
+                </router-link>
 
                 <a @click="logout" style="cursor:pointer">
                     <div class="grid grid-cols-5 gap-4 p-3 mb-3 bg-gray-300 rounded-md shadow-sm">
@@ -81,7 +80,7 @@
             //store vuex
             const store = useStore()
 
-             //vue router
+            //vue router
             const router = useRouter()
 
             // Same interface as this.$toast
@@ -98,8 +97,6 @@
             const user = computed(() => {
                 return store.state.auth.user
             })
-
-            console.log(user);
 
             //method logout
             function logout() {

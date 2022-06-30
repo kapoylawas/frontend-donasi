@@ -26,6 +26,12 @@ const auth = {
     GET_USER(state, user) {
       state.user = user; // <-- assign state user dengan response data user
     },
+
+     //fungsi logout
+     AUTH_LOGOUT(state) {
+      state.token = '' // <-- set state token ke empty
+      state.user  = {} // <-- set state user ke empty array
+  },
   },
 
   //actions

@@ -1,6 +1,7 @@
 <template>
     <div class="pt-20 pb-20">
         <div class="container grid grid-cols-1 p-5 mx-auto sm:w-full md:w-5/12">
+
             <form @submit.prevent="login">
                 <div class="p-5 bg-white rounded-md shadow-md">
                     <div class="text-xl">
@@ -29,6 +30,7 @@
 
                 </div>
             </form>
+
             <div class="mt-5 text-center">
                 Belum punya akun ? <router-link :to="{name: 'register'}" class="text-blue-600 underline">Daftar Sekarang
                     !</router-link>
@@ -41,7 +43,7 @@
 <script>
 
     //hook vue
-    import { ref, reactive } from 'vue'
+    import { ref, reactive, onMounted } from 'vue'
     
     //hook vuex
     import { useStore } from 'vuex'
@@ -115,6 +117,13 @@
                     }
                 })
             }
+
+            //check user is loggedIn
+            onMounted(() => {
+                if(store.getters['auth/isLoggedIn']) {
+                    router.push({name: 'dashboard'})
+                }
+            })
 
             //return object
             return {
