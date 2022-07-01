@@ -5,7 +5,7 @@
             <div class="container grid grid-cols-4 gap-4 p-2 mx-auto sm:w-full md:w-5/12">
 
                 <div>
-                    <router-link :to="{name: 'donation.index'}"
+                    <router-link :to="{name: 'home'}"
                     class="justify-center inline-block w-full text-center focus:text-teal-500 hover:text-teal-500">
                         <img class="inline-block mb-1" width="25" height="25"
                             src="@/assets/images/home.png">
