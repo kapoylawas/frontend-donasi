@@ -3,20 +3,20 @@
         <div v-if="categories.length > 0">
             <div class="grid items-center grid-cols-4 gap-4 mt-5 text-center md:gap-4">
                 <div v-for="category in categories" :key="category.id" class="col-span-2 p-4 text-xs text-center bg-white rounded-md shadow-md md:col-span-2 lg:col-span-1">
-                    <a href="#">
+                    <router-link :to="{name: 'category.show', params:{slug: category.slug}}">
                         <div>
                             <img :src="category.image" width="40" class="inline-block mb-2">
                         </div>
                         {{ category.name.toUpperCase() }}
-                    </a>
+                    </router-link>
                 </div>
                 <div class="col-span-2 p-4 text-xs text-center bg-white rounded-md shadow-md md:col-span-1 lg:col-span-1">
-                    <a href="#">
+                   <router-link :to="{name: 'category.index'}">
                         <div>
                             <img src="@/assets/images/menu.png" width="40" class="inline-block mb-2">
                         </div>
                         LAINNYA
-                    </a>
+                    </router-link>
                 </div>
             </div>
         </div>

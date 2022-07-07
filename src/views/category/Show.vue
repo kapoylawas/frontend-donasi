@@ -1,23 +1,18 @@
 <template>
     <div class="pt-20 pb-20">
-        <div class="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-5/12">
+        <div class="container grid grid-cols-1 p-5 mx-auto sm:w-full md:w-5/12">
 
-            <!-- slider -->
-            <div class="grid grid-cols-1 p-1 text-sm bg-white rounded shadow-md">
-                <Slider />
-            </div>
+            <div v-if="campaignCategory.length > 0">
 
-            <!-- categoryHome -->
-            <CategoryHome />
+                <h3> <i class="fa fa-list-ul"></i> KATEGORI <strong>{{ category.name.toUpperCase() }}</strong></h3>
 
-            <div v-if="campaigns.length > 0">
-                <div class="grid grid-cols-4 gap-4 mt-5" v-for="campaign in campaigns" :key="campaign.id">
+                <div class="grid grid-cols-4 gap-4 mt-5" v-for="campaign in campaignCategory" :key="campaign.id">
                     <div class="col-span-4">
                         <div class="p-2 bg-white rounded-md shadow-md">
                             <div class="md:flex rounded-xl md:p-0">
                                 <img class="object-cover w-full rounded h-34 md:w-56"
                                     :src="campaign.image" width="384" height="512">
-                                <div class="w-full p-5 pt-6 space-y-4 text-center md:p-3 md:text-left">
+                                <div class="p-5 pt-6 space-y-4 text-center md:p-3 md:text-left">
                                     <a href="#">
                                         <p class="text-sm font-semibold">
                                             {{ campaign.title }}
@@ -67,92 +62,63 @@
             </div>
             <div v-else>
 
-                <div v-for="index in 2" :key="index" class="grid grid-cols-1 p-3 mt-4 mb-4 text-sm bg-white rounded shadow-md">
-                    <FacebookLoader class="h-24"/>
+                <div class="p-4 mb-3 text-white bg-red-500 rounded-md">
+                    Data Campaign Berdasarkan Kategori <strong>{{ category.name }}</strong> Belum Tersedia!
                 </div>
 
             </div>
 
         </div>
-
-        <div class="mt-4 mb-4 text-center" v-show="nextExists">
-            <a @click="loadMore"
-                class="p-2 px-3 text-white bg-gray-700 rounded-md shadow-md cursor-pointer focus:outline-none focus:bg-gray-900">LIHAT
-                SEMUA <i class="fa fa-long-arrow-alt-right"></i></a>
-        </div>
-
     </div>
 </template>
 
 <script>
 
     //hook vue
-    import { computed, onMounted } from 'vue'
+    import { onMounted, computed } from 'vue'
 
-    //vuex
+    //hook vuex
     import { useStore } from 'vuex'
 
-    //component slider
-    import Slider from '@/components/Slider.vue'
-
-    //component categoryHome
-    import CategoryHome from '@/components/CategoryHome.vue'
-
-    //vue content loader
-    import { FacebookLoader } from 'vue-content-loader'
+    //hook vue router
+    import { useRoute } from 'vue-router'
 
     export default {
 
-        name: 'HomeComponent',
-
-        components: {
-            Slider,         // <-- register component slider
-            CategoryHome,   // <-- register component CategoryHome
-            FacebookLoader  // <-- register component FacebooLoader dari Vue Content Loader
-        },
+        name: 'CategoryShowComponent',
 
         setup() {
 
             //store vuex
             const store = useStore()
 
-            //onMounted akan menjalankan action "getCampaign" di module "campaign"
+            //const route
+            const route = useRoute()
+
+            //onMounted akan menjalankan action "getDetailCategory" di module "category"
             onMounted(() => {
-                store.dispatch('campaign/getCampaign')
+                store.dispatch('category/getDetailCategory', route.params.slug)
             })
 
-            //digunakan untuk get data  state "campaigns" di module "campaign" 
-            const campaigns = computed(() => {
-                return store.state.campaign.campaigns
+            //digunakan untuk get data state "category" di module "category" 
+            const category = computed(() => {
+                return store.state.category.category
             })
 
-            /**
-             * LOADMORE
-             */
-
-            //get status NextExists
-            const nextExists = computed(() => {
-                return store.state.campaign.nextExists
+            //digunakan untuk get data campaign di satate "campaignCategory" di module "category" 
+            const campaignCategory = computed(() => {
+                return store.state.category.campaignCategory
             })
-
-            //get nextPage
-            const nextPage = computed(() => {
-                return store.state.campaign.nextPage
-            })
-
-            //loadMore function
-            function loadMore() {
-                store.dispatch('campaign/getLoadMore', nextPage.value)
-            }   
 
             return {
-                campaigns,      // <-- return campaigns
-                nextExists,     // <-- return nextExists,
-                nextPage,       // <-- return nextPage
-                loadMore,        // <-- return loadMore
+                category,           // <-- state category
+                campaignCategory    // <-- state campaignCategory   
             }
-
         }
 
     }
 </script>
+
+<style>
+
+</style>

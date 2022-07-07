@@ -41,7 +41,7 @@ const slider = {
                 console.log(error)
 
             })
-            console.log(Api.get('/slider'));
+            // console.log(Api.get('/slider'));
         }
     },
 
