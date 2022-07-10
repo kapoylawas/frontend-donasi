@@ -18,11 +18,12 @@
                                 <img class="object-cover w-full rounded h-34 md:w-56"
                                     :src="campaign.image" width="384" height="512">
                                 <div class="w-full p-5 pt-6 space-y-4 text-center md:p-3 md:text-left">
-                                    <a href="#">
+                                    <router-link :to="{name: 'campaign.show', params:{slug: campaign.slug }}">
                                         <p class="text-sm font-semibold">
-                                            {{ campaign.title }}
+                                        {{ campaign.title }}
                                         </p>
-                                    </a>
+                                    </router-link>
+
                                     <div class="font-medium">
                                         <div class="mt-3 text-xs text-gray-500">
                                             {{ campaign.user.name }}
