@@ -77,6 +77,11 @@ const routes = [
         name: 'campaign.show',
         component: () => import( /* webpackChunkName: "campaignShow" */ '@/views/campaign/Show.vue')
     },
+    {
+        path: '/donation/create/:slug',
+        name: 'donation.create',
+        component: () => import( /* webpackChunkName: "campaignShow" */ '@/views/donation/Create.vue')
+    },
 ]
 
 //create router

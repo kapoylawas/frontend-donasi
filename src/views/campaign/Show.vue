@@ -60,11 +60,13 @@
                 </div>
                 <div v-else>
                     <div class="mt-5">
-                        <a href="#">
+                        
+                        <router-link :to="{name: 'donation.create', params:{slug: route.params.slug }}">
                             <button
                                 class="w-full py-3 text-xl font-bold uppercase bg-yellow-500 rounded-md shadow-md focus:outline-none focus:bg-yellow-600">Donasi
                                 Sekarang!</button>
-                        </a>
+                       </router-link>
+
                     </div>
                 </div>
 
@@ -204,6 +206,7 @@
                 user,           // <-- user
                 sumDonation,    // <-- sumDonation
                 donations,      // <-- donations
+                route,
             }
         }
 
