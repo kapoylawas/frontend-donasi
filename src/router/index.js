@@ -28,7 +28,7 @@ const routes = [
     {
         path: '/donation',
         name: 'donation.index',
-        component: () => import( /* webpackChunkName: "donation" */ '@/views/donation/Index.vue'),
+        component: () => import( /* webpackChunkName: "donationIndex" */ '@/views/donation/Index.vue'),
         meta: {
             //chek is loggedIn
             requiresAuth: true
@@ -46,7 +46,7 @@ const routes = [
     {
         path: '/profile/password',
         name: 'profile.password',
-        component: () => import( /* webpackChunkName: "profile" */ '@/views/profile/Password.vue'),
+        component: () => import( /* webpackChunkName: "profilePassword" */ '@/views/profile/Password.vue'),
         meta: {
             //chek is loggedIn
             requiresAuth: true
@@ -80,12 +80,16 @@ const routes = [
     {
         path: '/donation/create/:slug',
         name: 'donation.create',
-        component: () => import( /* webpackChunkName: "campaignShow" */ '@/views/donation/Create.vue')
+        component: () => import( /* webpackChunkName: "donationCreate" */ '@/views/donation/Create.vue'),
+        meta: {
+            //chek is loggedIn
+            requiresAuth: true
+        }
     },
     {
         path: '/search',
         name: 'search',
-        component: () => import( /* webpackChunkName: "campaignShow" */ '@/views/search/Index.vue')
+        component: () => import( /* webpackChunkName: "search" */ '@/views/search/Index.vue')
     },
 ]
 

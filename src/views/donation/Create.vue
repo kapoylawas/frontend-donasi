@@ -1,33 +1,37 @@
 <template>
     <div class="pt-20 pb-20">
         <div class="container grid grid-cols-1 p-3 mx-auto sm:w-full md:w-5/12">
+
             <div class="p-5 bg-white rounded-md shadow-md">
                 <div class="text-xl">
-                    Masukkan Nominal Donasi
+                    MASUKKAN NOMINAL DONASI
                 </div>
-                <div class="mt-2 mb-3 border-2 border-gray-200"></div>
+                <div class="mt-3 mb-2 border-2 border-gray-200"></div>
 
                 <div class="mb-2">
                     <label class="mt-2 text-lg font-bold">Rp.</label>
                     <input type="number"
-                        class="w-full p-2 mt-2 text-xl text-right placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-15 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600" v-model="donation.amount"
-                    >
+                        class="w-full p-2 mt-2 text-xl text-right placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none h-15 focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600"
+                        placeholder="0" v-model="donation.amount">
                 </div>
 
                 <div class="mb-2">
                     <label class="mt-2 text-lg font-bold">Do'a</label>
-                    <textarea rows="3"  v-model="donation.pray"
+                    <textarea rows="3" v-model="donation.pray"
                         class="w-full p-5 mt-2 placeholder-gray-600 bg-gray-200 border border-gray-200 rounded shadow-sm appearance-none focus:outline-none focus:placeholder-gray-600 focus:bg-white focus-within:text-gray-600" placeholder="Tulis Do'a/Ucapan">
                     </textarea>
                 </div>
 
-                <button @click="storeDonation" class="w-full mt-4 text-base font-bold uppercase bg-yellow-500 rounded-md shadow-md focus:outline-none focus:bg-yellow-600">LANJUT PEMBAYARAN</button>
+                <button @click="storeDonation" class="w-full py-2 mt-4 text-base font-bold uppercase bg-yellow-500 rounded-md shadow-md focus:outline-none focus:bg-yellow-600">LANJUT PEMBAYARAN</button>
+
             </div>
+
         </div>
     </div>
 </template>
 
 <script>
+
     //hook vue
     import { reactive } from 'vue'
     
@@ -41,9 +45,11 @@
     import { useToast } from "vue-toastification"
 
     export default {
+
         name: 'DonationCreateComponent',
 
         setup() {
+
             //store vuex
             const store = useStore()
 
@@ -62,8 +68,6 @@
                 pray: '',                       // <-- data kata-kata/doa
                 campaignSlug: route.params.slug // <-- data "slug" dari campaign
             })
-
-            // console.log(donation);
 
             //method store donation
             function storeDonation() {
@@ -89,9 +93,15 @@
             }
 
             return {
-                donation,
-                storeDonation,
+                donation,       // <-- state donation
+                storeDonation   // <-- method storeDonation
             }
+
         }
+
     }
 </script>
+
+<style>
+
+</style>
