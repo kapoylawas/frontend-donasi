@@ -75,6 +75,7 @@
 </template>
 
 <script>
+
     //hook vue
     import { computed, onMounted } from 'vue'
 
@@ -84,14 +85,16 @@
     //hook vue router
     import { useRouter } from 'vue-router'
 
-export default {
+    export default {
+
         name: 'DonationComponent',
 
-         setup() {
+        setup() {
+
             //store vuex
             const store = useStore()
 
-             //router
+            //router
             const router = useRouter()
 
             //onMounted akan menjalankan action "getDonation" di module "donation"
@@ -108,6 +111,7 @@ export default {
             const nextExists = computed(() => {
                 return store.state.donation.nextExists
             })
+
             //digunakan untuk get data state "nextPage" di module "donation" 
             const nextPage = computed(() => {
                 return store.state.donation.nextPage
@@ -118,7 +122,9 @@ export default {
                 store.dispatch('donation/getLoadmore', nextPage.value)
             }
 
+            //function payment "Midtrans"
             function payment(snap_token) {
+
                 window.snap.pay(snap_token, {
 
                     onSuccess: function () {
@@ -131,19 +137,21 @@ export default {
                         router.push({name: 'donation.index'})  
                     }
                 })
+
             }
 
             return {
-                donations,  // <-- return donations
-                nextExists, // <-- return nextExists
-                nextPage,   // <-- return nextPage
-                loadMore,   // <-- return loadMore
-                payment,
+                donations,      // <-- return donations
+                nextExists,     // <-- return nextExists
+                nextPage,       // <-- return nextPage
+                loadMore,       // <-- return loadMore
+                payment,        // <-- return payment Midtrans Snap
             }
-         }
-}
-</script>
 
+        }
+
+    }
+</script>
 
 <style>
 

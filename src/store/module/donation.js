@@ -152,8 +152,8 @@ const donation = {
 
                 })
 
-                // console.log(Api.post('/donation', data));
             })
+
         }
 
     },
