@@ -31,7 +31,7 @@
                                             </p>
                                         </figcaption>
                                         <div v-if="donation.status == 'pending'">
-                                            <button class="w-full px-2 py-1 text-xs bg-yellow-600 rounded shadow-sm focus:outline-none">BAYAR SEKARANG</button>
+                                            <button @click="payment(donation.snap_token)" class="w-full px-2 py-1 text-xs bg-yellow-600 rounded shadow-sm focus:outline-none">BAYAR SEKARANG</button>
                                         </div>
                                     </div>
                                     <div class="ml-auto text-sm text-gray-500 underline">
@@ -81,12 +81,18 @@
     //hook vuex
     import { useStore } from 'vuex'
 
+    //hook vue router
+    import { useRouter } from 'vue-router'
+
 export default {
         name: 'DonationComponent',
 
          setup() {
             //store vuex
             const store = useStore()
+
+             //router
+            const router = useRouter()
 
             //onMounted akan menjalankan action "getDonation" di module "donation"
             onMounted(() => {
@@ -112,11 +118,27 @@ export default {
                 store.dispatch('donation/getLoadmore', nextPage.value)
             }
 
+            function payment(snap_token) {
+                window.snap.pay(snap_token, {
+
+                    onSuccess: function () {
+                        router.push({name: 'donation.index'})  
+                    },
+                    onPending: function () {
+                        router.push({name: 'donation.index'})
+                    },
+                    onError: function () {
+                        router.push({name: 'donation.index'})  
+                    }
+                })
+            }
+
             return {
                 donations,  // <-- return donations
                 nextExists, // <-- return nextExists
                 nextPage,   // <-- return nextPage
                 loadMore,   // <-- return loadMore
+                payment,
             }
          }
 }
