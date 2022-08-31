@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 // Added by the CLI
-import './registerServiceWorker.js';
+import * as serviceWorker from './registerServiceWorker';
 
+serviceWorker.unregister();
 createApp(App).use(router).mount('#app');
 
 /**
